@@ -21,7 +21,6 @@
     "show": "表示",
     "hide": "非表示"
   },
-
   "mini": {
     "geminiDone": "Gemini の作業が完了しました。クリックして表示。",
     "opencodeDone": "opencode の作業が完了しました。クリックして表示。",
@@ -60,11 +59,9 @@
     "remote": "リモート",
     "custom": "カスタム",
     "other": "その他",
-    "createChar": "キャラクター作成",
     "ipGenshin": "原神",
     "ipUmaMusume": "ウマ娘"
   },
-
   "charNames": {
     "派蒙": "パイモン",
     "温迪": "ウェンティ",
@@ -83,7 +80,6 @@
     "香企鹅": "ペンギンガム",
     "诗歌剧": "シゲキ"
   },
-
   "settings": {
     "ocConnections": "OpenClaw 接続",
     "noConnections": "接続がありません。「追加」をクリックしてOpenClawインスタンスに接続してください。",
@@ -103,7 +99,6 @@
     "step2": "2. 公開鍵をリモートサーバーにコピー",
     "step3": "3. パスワードなしログインを確認",
     "step4": "4. ユーザー名とサーバーアドレスを入力し、「テスト」をクリック",
-
     "claudeCode": "Claude Code",
     "enableClaudeCode": "Claude Codeを有効化",
     "enableClaudeCodeDesc": "Hookでローカルの Claude Code セッションを監視",
@@ -113,7 +108,6 @@
     "enableClaudeDesktopDesc": "Hook でローカルの Claude Code Desktop セッションを監視",
     "hookInstalled": "Hook インストール済み",
     "hookFailed": "インストール失敗:",
-
     "display": "表示",
     "mascotPosition": "マスコット位置",
     "mascotPositionDesc": "ノッチのどちら側にマスコットを表示するか",
@@ -131,7 +125,6 @@
     "largeMascotScaleDesc": "マスコットの拡大倍率",
     "islandBg": "アイランド背景",
     "islandBgDesc": "背景画像を選択またはアップロードし、ドラッグで切り抜き範囲を選択",
-
     "sound": "サウンド",
     "petSfx": "キャラクターボイス",
     "petSfxDesc": "インタラクション時にキャラクターの声を再生",
@@ -172,12 +165,10 @@
     "autoCloseCompletionDesc": "完了ポップアップを5秒後に自動で閉じます",
     "autoExpandOnTask": "自動ポップアップ",
     "autoExpandOnTaskDesc": "タスク完了や入力待ちの際にパネルを自動で展開します",
-
     "system": "システム",
     "autostart": "ログイン時に起動",
     "autostartDesc": "ログイン時に oc-claw を自動的に起動します",
     "autostartFailed": "自動起動の設定に失敗しました:",
-
     "about": "バージョン情報",
     "currentVersion": "現在のバージョン",
     "latest": "最新",
@@ -194,13 +185,11 @@
     "checking": "確認中...",
     "checkUpdate": "アップデートを確認",
     "exitApp": "アプリを終了",
-
     "appMode": "モード",
     "codingMode": "コーディングモード",
     "codingModeDesc": "マルチエージェント監視、トークン統計＆タスク通知",
     "petMode": "ペットモード",
     "petModeDesc": "豊富なアクション、育成システム＆インタラクティブ",
-
     "language": "言語",
     "languageDesc": "表示言語を選択",
     "langZh": "中文",
@@ -210,14 +199,12 @@
     "langEs": "Español",
     "langFr": "Français"
   },
-
   "onboarding": {
     "chooseModeTitle": "モードを選択",
     "chooseModeSubtitle": "設定からいつでもモードを切り替えられます。",
     "codingModeLongDesc": "AIエージェントを監視。マスコットにホバーして状態・セッション・活動を確認。",
     "petModeLongDesc": "デスクトップペットを育成！餌やり・遊び・豊富なアニメで親密度アップ。"
   },
-
   "pet": {
     "dailyGift": "デイリーギフト",
     "claimed": "受取済み",
@@ -237,7 +224,6 @@
     "min": "分",
     "go": "GO"
   },
-
   "petPicker": {
     "mascots": "マスコット",
     "selectedMascot": "{{name}} を選択中",
@@ -255,86 +241,6 @@
     "demoModePickHint": "ペットをクリックして画面にもう1体配置",
     "addMascot": "マスコットを追加"
   },
-
-  "character": {
-    "trackAgent": "エージェントを追跡",
-    "trackAgentDesc": "デスクトップペットのステータスとチャットをこのエージェントにバインド",
-    "currentPetChar": "現在のペットキャラクター",
-    "uploadPetGif": "ペットアニメーションをアップロード",
-    "charName": "キャラクター名",
-    "charNamePlaceholder": "例: hutao",
-    "workGif": "作業アニメーション",
-    "restGif": "休憩アニメーション",
-    "uploadFiles": "ファイルをアップロード",
-    "inUse": "使用中",
-    "editImages": "画像を編集",
-    "deleteChar": "キャラクターを削除",
-    "noImages": "画像なし",
-    "noCharacters": "キャラクターがありません。アップロードしてください。",
-    "miniModeChar": "Miniモードキャラクター",
-    "miniModeCharDesc": "画面上部のMiniウィジェットに表示するキャラクターを選択",
-    "characters": "キャラクター",
-    "editChar": "キャラクターを編集",
-    "uploadMiniGif": "Miniアニメーションをアップロード",
-    "actionType": "アクションタイプ",
-    "actionTypePlaceholder": "例: keli",
-    "selectGifFile": "アニメーションファイルを選択",
-    "clickOrDrag": "クリックまたはファイルをドラッグ",
-    "gifFormat": "GIF形式対応、最大5MB",
-    "autoSelect": "自動選択",
-    "charNameExists": "キャラクター名は既に存在します。ペットアニメーションが追加されます。",
-    "saveFailed": "保存失敗:"
-  },
-
-  "createChar": {
-    "title": "新しいキャラクターを作成",
-    "step1Title": "Geminiでキャラクタースプライトを生成",
-    "step1Desc": "Google Geminiを使用してキャラクタースプライトシートを生成します。",
-    "openGemini": "Geminiを開く",
-    "step2Title": "画像をアップロードして自動スライス",
-    "dropToUpload": "ドロップしてアップロード",
-    "clickOrDragUpload": "クリックまたはドラッグしてアップロード",
-    "supportFormats": "PNG, JPG, WEBP対応",
-    "processing": "画像を処理中...",
-    "processingDesc": "アクションフレームを認識してアニメーションを生成中",
-    "charName": "キャラクター名",
-    "charNamePlaceholder": "キャラクター名を入力...",
-    "tunFrames": "アクションフレームの微調整",
-    "tuneDesc": "自動スライスにずれがある場合、X/Y座標を調整してください",
-    "reUpload": "再アップロード",
-    "saveChar": "キャラクターを保存",
-    "nameExists": "キャラクター名は既に存在します。別の名前を選んでください。",
-    "cantReadFile": "ドロップされたファイルを読み取れません"
-  },
-
-  "gifMaker": {
-    "geminiApiKey": "Gemini API Key",
-    "baseUrl": "Base URL",
-    "optional": "(任意)",
-    "defaultGoogle": "デフォルト（Google公式）",
-    "charName": "キャラクター名",
-    "charNamePlaceholder": "例: hutao",
-    "referenceImage": "参考画像",
-    "reselect": "再選択",
-    "selectFile": "ファイルを選択",
-    "aiGenerating": "AI生成中...",
-    "aiGenerate": "AI生成",
-    "uploadImage": "画像をアップロード",
-    "prompt": "プロンプト",
-    "idleHint": "「プロンプト」をクリックして生成要件を確認し、ChatGPT / Gemini / Midjourneyなどにコピーして画像を生成し、アップロード",
-    "uploadHint": "プロンプトをChatGPT/Geminiなどにコピーして画像を生成し、ここにアップロード",
-    "globalOffset": "グローバルオフセット",
-    "saveAs": "{{label}}として保存",
-    "enterCharName": "キャラクター名を入力してください",
-    "fillApiKey": "Gemini API Keyを入力してください",
-    "processingFrames": "フレームを処理中...",
-    "statusWaiting": "待機中",
-    "statusGenerating": "AI生成中...",
-    "statusProcessing": "処理中...",
-    "statusReady": "準備完了",
-    "statusError": "エラー"
-  },
-
   "agentDetail": {
     "working": "作業中",
     "idleStatus": "アイドル",
@@ -361,7 +267,6 @@
     "times": "回",
     "callsUnit": "回数"
   },
-
   "claudeStats": {
     "title": "Claude Code 統計",
     "titleCodex": "Codex 統計",

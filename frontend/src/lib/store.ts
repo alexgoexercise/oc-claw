@@ -1,5 +1,4 @@
 import { invoke } from '@tauri-apps/api/core'
-import { emit } from '@tauri-apps/api/event'
 import { load } from '@tauri-apps/plugin-store'
 import type { CharacterMeta, OcConnection } from './types'
 
@@ -13,10 +12,6 @@ const isWindows = typeof navigator !== 'undefined' && navigator.userAgent.includ
 const ASSET_PREFIX = import.meta.env.DEV
   ? '/assets/builtin'
   : isWindows ? 'http://localasset.localhost' : 'localasset://localhost'
-export const CUSTOM_ASSET_PREFIX = import.meta.env.DEV
-  ? '/assets/custom'
-  : isWindows ? 'http://customasset.localhost' : 'customasset://localhost'
-
 export const DEFAULT_CHAR_NAME = '诗歌剧'
 
 export const DEFAULT_CHAR: CharacterMeta = {
@@ -30,8 +25,6 @@ export const DEFAULT_CHAR: CharacterMeta = {
     ],
   },
 }
-
-export const MINI_CATEGORIES = ['top', 'walk', 'fish', 'sport']
 
 export async function loadCharacters(): Promise<CharacterMeta[]> {
   const store = await getStore()
@@ -106,25 +99,6 @@ export async function loadCharacters(): Promise<CharacterMeta[]> {
   return merged
 }
 
-export async function saveCharacters(chars: CharacterMeta[]) {
-  const store = await getStore()
-  await store.set('characters', chars)
-  await store.save()
-  await emit('character-changed')
-}
-
-export async function getActiveCharacter(): Promise<string> {
-  const store = await getStore()
-  return ((await store.get('active_character')) as string) || DEFAULT_CHAR_NAME
-}
-
-export async function setActiveCharacter(name: string) {
-  const store = await getStore()
-  await store.set('active_character', name)
-  await store.save()
-  await emit('character-changed')
-}
-
 /** Load OC connections, migrating from old single-connection format if needed. */
 export async function loadOcConnections(): Promise<OcConnection[]> {
   const store = await getStore()
@@ -150,14 +124,5 @@ export async function saveOcConnections(connections: OcConnection[]) {
   const store = await getStore()
   await store.set('oc_connections', connections)
   await store.save()
-}
-
-export function fileToDataUrl(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = reject
-    reader.readAsDataURL(file)
-  })
 }
 

@@ -1675,85 +1675,6 @@ async fn scan_characters(app: tauri::AppHandle) -> Result<serde_json::Value, Str
 }
 
 #[tauri::command]
-async fn save_character_gif(
-    app: tauri::AppHandle,
-    char_name: String,
-    file_name: String,
-    subfolder: String,
-    data_url: String,
-) -> Result<(), String> {
-    use base64::Engine;
-
-    if char_name.contains("..") || char_name.contains('/') || char_name.contains('\\') {
-        return Err("invalid character name".into());
-    }
-    if file_name.contains("..") || file_name.contains('/') || file_name.contains('\\') {
-        return Err("invalid file name".into());
-    }
-
-    let base = custom_assets_dir(&app)?;
-    let mut target = base.join(&char_name);
-    if !subfolder.is_empty() {
-        if subfolder.contains("..") {
-            return Err("invalid subfolder".into());
-        }
-        target = target.join(&subfolder);
-    }
-    tokio::fs::create_dir_all(&target)
-        .await
-        .map_err(|e| format!("create dir: {}", e))?;
-
-    let b64 = data_url
-        .find(",")
-        .map(|i| &data_url[i + 1..])
-        .unwrap_or(&data_url);
-
-    let bytes = base64::engine::general_purpose::STANDARD
-        .decode(b64)
-        .map_err(|e| format!("base64 decode: {}", e))?;
-
-    let filepath = target.join(&file_name);
-    tokio::fs::write(&filepath, &bytes)
-        .await
-        .map_err(|e| format!("write file: {}", e))?;
-
-    Ok(())
-}
-
-#[tauri::command]
-async fn delete_character_assets(app: tauri::AppHandle, name: String) -> Result<(), String> {
-    if name.contains("..") || name.contains('/') || name.contains('\\') {
-        return Err("invalid name".into());
-    }
-    let base = custom_assets_dir(&app)?;
-    let target = base.join(&name);
-    if target.exists() {
-        tokio::fs::remove_dir_all(&target)
-            .await
-            .map_err(|e| format!("delete: {}", e))?;
-    }
-    Ok(())
-}
-
-#[tauri::command]
-async fn delete_character_gif(app: tauri::AppHandle, char_name: String, subfolder: String, file_name: String) -> Result<(), String> {
-    if char_name.contains("..") || char_name.contains('/') || char_name.contains('\\') {
-        return Err("invalid name".into());
-    }
-    if subfolder.contains("..") || file_name.contains("..") || file_name.contains('/') || file_name.contains('\\') {
-        return Err("invalid path".into());
-    }
-    let base = custom_assets_dir(&app)?;
-    let target = base.join(&char_name).join(&subfolder).join(&file_name);
-    if target.exists() {
-        tokio::fs::remove_file(&target)
-            .await
-            .map_err(|e| format!("delete gif: {}", e))?;
-    }
-    Ok(())
-}
-
-#[tauri::command]
 async fn get_agents(mode: Option<String>, url: Option<String>, token: Option<String>, ssh_host: Option<String>, ssh_user: Option<String>) -> Result<Vec<AgentInfo>, String> {
     log::info!("[get_agents] mode={:?} ssh_host={:?}", mode, ssh_host);
     if mode.as_deref() == Some("remote") {
@@ -6718,25 +6639,6 @@ async fn open_detail_panel(app: tauri::AppHandle) -> Result<(), String> {
     let _ = win.maximize();
 
     Ok(())
-}
-
-/// Proxy a POST request to bypass CORS restrictions in the webview.
-#[tauri::command]
-async fn proxy_post(url: String, body: String) -> Result<String, String> {
-    let client = reqwest::Client::new();
-    let resp = client
-        .post(&url)
-        .header("Content-Type", "application/json")
-        .body(body)
-        .send()
-        .await
-        .map_err(|e| format!("request failed: {}", e))?;
-    let status = resp.status().as_u16();
-    let text = resp.text().await.map_err(|e| format!("read body: {}", e))?;
-    if status >= 400 {
-        return Err(format!("HTTP {}: {}", status, text));
-    }
-    Ok(text)
 }
 
 // ─── Play system sound ───
@@ -17393,7 +17295,7 @@ pub fn run() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![get_status, send_chat, open_detail_panel, save_character_gif, delete_character_assets, delete_character_gif, get_agents, get_health, get_agent_metrics, interrupt_agent, scan_characters, get_agent_extra_info, open_mini, close_mini, set_mini_expanded, set_mini_size, set_efficiency_hover_tracking, cursor_over_mini_window, set_outside_click_watch, resize_mini_height, move_mini_by, get_mini_origin, get_mini_monitor_rect, set_mini_origin, set_ime_mode, get_agent_sessions, get_session_preview, get_session_messages, get_active_sessions, proxy_post, play_sound, get_claude_sessions, get_claude_conversation, install_claude_hooks, install_codex_hooks, install_cursor_hooks, install_gemini_hooks, install_opencode_hooks, install_hermes_hooks, test_hermes_hook, install_hermes_remote_plugin, get_hermes_remote_stats, get_hermes_remote_sessions, get_hermes_sessions_summary, get_hermes_recent_activity, get_hermes_remote_recent_activity, test_hermes_ssh, remove_claude_session, resolve_claude_permission, get_claude_stats, open_url, activate_app, focus_cursor_terminal, check_ax_permission, request_ax_permission, jump_to_claude_terminal, check_for_update, run_update, close_ssh, read_local_file, list_backgrounds, save_background, get_background_data, exit_app, get_ssh_key_info, reset_ssh, get_ui_scale, list_custom_codex_pets, open_codex_pets_dir, import_codex_pet, pick_codex_pet_folder, reassert_floating, spawn_demo_mascot, close_demo_mascot, close_demo_mascots, spawn_extra_mascot, close_extra_mascot, close_extra_mascots, list_extra_mascots, set_extra_mascots_hidden, debug_log, update_tray_language, set_pet_mode_window, set_pet_context_menu, set_pet_pomodoro_active, get_now_playing, get_system_idle_time, get_keyboard_idle_secs])
+        .invoke_handler(tauri::generate_handler![get_status, send_chat, open_detail_panel, get_agents, get_health, get_agent_metrics, interrupt_agent, scan_characters, get_agent_extra_info, open_mini, close_mini, set_mini_expanded, set_mini_size, set_efficiency_hover_tracking, cursor_over_mini_window, set_outside_click_watch, resize_mini_height, move_mini_by, get_mini_origin, get_mini_monitor_rect, set_mini_origin, set_ime_mode, get_agent_sessions, get_session_preview, get_session_messages, get_active_sessions, play_sound, get_claude_sessions, get_claude_conversation, install_claude_hooks, install_codex_hooks, install_cursor_hooks, install_gemini_hooks, install_opencode_hooks, install_hermes_hooks, test_hermes_hook, install_hermes_remote_plugin, get_hermes_remote_stats, get_hermes_remote_sessions, get_hermes_sessions_summary, get_hermes_recent_activity, get_hermes_remote_recent_activity, test_hermes_ssh, remove_claude_session, resolve_claude_permission, get_claude_stats, open_url, activate_app, focus_cursor_terminal, check_ax_permission, request_ax_permission, jump_to_claude_terminal, check_for_update, run_update, close_ssh, read_local_file, list_backgrounds, save_background, get_background_data, exit_app, get_ssh_key_info, reset_ssh, get_ui_scale, list_custom_codex_pets, open_codex_pets_dir, import_codex_pet, pick_codex_pet_folder, reassert_floating, spawn_demo_mascot, close_demo_mascot, close_demo_mascots, spawn_extra_mascot, close_extra_mascot, close_extra_mascots, list_extra_mascots, set_extra_mascots_hidden, debug_log, update_tray_language, set_pet_mode_window, set_pet_context_menu, set_pet_pomodoro_active, get_now_playing, get_system_idle_time, get_keyboard_idle_secs])
         .manage(ActiveAgentPid { pid: Mutex::new(None) })
         .manage(ClaudeState { sessions: Arc::new(Mutex::new(HashMap::new())), pending_permissions: Arc::new(Mutex::new(HashMap::new())), dismissed: Arc::new(Mutex::new(std::collections::HashSet::new())) })
         .run(tauri::generate_context!())

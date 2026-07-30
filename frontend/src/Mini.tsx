@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { SettingsTab } from './components/SettingsTab'
 import { UpdateModal, type UpdateModalInfo, type UpdateModalPhase } from './components/UpdateModal'
 import { AgentDetailView } from './components/AgentDetailView'
-import { CreateCharacterModal } from './components/CreateCharacterModal'
 import { ClaudeStatsView } from './components/ClaudeStatsView'
 import { getStore, DEFAULT_CHAR, DEFAULT_CHAR_NAME, loadCharacters, loadOcConnections, saveOcConnections } from './lib/store'
 import type { AgentMetrics, OcConnection } from './lib/types'
@@ -638,12 +637,6 @@ export default function Mini() {
     }
   }, [hiding, settingsMode, showSettingsOverlay, settingsTransitioning, debugToTerminal])
   const [settingsNav, setSettingsNav] = useState<'pairing' | 'settings'>('pairing')
-  const [isCreateModalOpen, _setIsCreateModalOpen] = useState(false)
-  const isCreateModalOpenRef = useRef(false)
-  const setIsCreateModalOpen = (v: boolean) => {
-    isCreateModalOpenRef.current = v
-    _setIsCreateModalOpen(v)
-  }
   // ─── Pet / Nurture mode state ───
   const [appMode, setAppMode] = useState<AppMode | null>(null)
   const appModeRef = useRef<AppMode | null>(null)
@@ -1142,8 +1135,7 @@ export default function Mini() {
       expanded ||
       showSettingsOverlay ||
       updateModalOpen ||
-      showOnboarding ||
-      isCreateModalOpen
+      showOnboarding
     ) {
       setWalkFlipped(false)
       updateWalkDir(0)
@@ -1268,7 +1260,6 @@ export default function Mini() {
     showSettingsOverlay,
     updateModalOpen,
     showOnboarding,
-    isCreateModalOpen,
     updateWalkDir,
   ])
 
@@ -2739,7 +2730,7 @@ export default function Mini() {
 
   const openAvailableUpdateModal = useCallback(
     async (info: UpdateModalInfo) => {
-      if (settingsModeRef.current || settingsTransitioningRef.current || isCreateModalOpenRef.current) {
+      if (settingsModeRef.current || settingsTransitioningRef.current) {
         pendingUpdateInfoRef.current = info
         return
       }
@@ -2881,12 +2872,12 @@ export default function Mini() {
 
   useEffect(() => {
     if (updateModalOpenRef.current) return
-    if (settingsMode || settingsTransitioning || isCreateModalOpen) return
+    if (settingsMode || settingsTransitioning) return
     const pending = pendingUpdateInfoRef.current
     if (!pending) return
     pendingUpdateInfoRef.current = null
     void openAvailableUpdateModal(pending)
-  }, [isCreateModalOpen, openAvailableUpdateModal, settingsMode, settingsTransitioning])
+  }, [openAvailableUpdateModal, settingsMode, settingsTransitioning])
 
   useEffect(() => {
     if (!updateModalOpen || updateModalPhase !== 'available' || !updateModalInfo?.hasUpdate) return
@@ -3446,7 +3437,6 @@ export default function Mini() {
       clearTimeout(hoverCloseTimerRef.current)
       hoverCloseTimerRef.current = null
     }
-    setIsCreateModalOpen(false)
     setShowPanel(false)
     setSelectedAgentId(null)
     setSelectedClaudeSession(null)
@@ -3741,7 +3731,6 @@ export default function Mini() {
       }
     }
     debugToTerminal('close', `exitSettings proceed force=${force}`)
-    setIsCreateModalOpen(false)
     settingsTransitioningRef.current = true
     setShowSettingsOverlay(false)
     try {
@@ -3820,7 +3809,6 @@ export default function Mini() {
   useEffect(() => {
     if (!expanded || pinned || settingsMode || settingsTransitioning || updateModalOpen) return
     const onClick = (e: MouseEvent) => {
-      if (isCreateModalOpenRef.current) return
       if (isSettingsPickerBlockingClose()) {
         debugToTerminal('outside', 'window mousedown ignored: settings picker active')
         return
@@ -3847,7 +3835,6 @@ export default function Mini() {
     invoke('set_outside_click_watch', { active: true }).catch(() => {})
     const unlisten = listen('mini-outside-click', () => {
       if (pinnedRef.current || settingsModeRef.current) return
-      if (isCreateModalOpenRef.current) return
       if (filePickerOpenRef.current) return
       if (isSettingsPickerBlockingClose()) return
       debugToTerminal('outside', 'mini-outside-click -> collapse')
@@ -6526,16 +6513,6 @@ export default function Mini() {
         onSkipVersion={skipCurrentUpdateVersion}
         onUpdateNow={runUpdateFromModal}
         onRestartNow={restartFromModal}
-      />
-
-      <CreateCharacterModal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-        onSaved={async () => {
-          await invoke('scan_characters')
-          const chars = await loadCharacters()
-          setCharacters(chars)
-        }}
       />
 
       {/* Onboarding modal — first launch only */}

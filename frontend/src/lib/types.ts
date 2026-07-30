@@ -1,7 +1,3 @@
-import type { ChromaKeyOptions, Offset } from '../utils/spriteUtils'
-
-export type { ChromaKeyOptions, Offset }
-
 export interface SessionInfo {
   id: string
   label?: string
@@ -69,32 +65,9 @@ export interface AgentMetrics {
   channel?: string
 }
 
-export interface PipelinePreset {
-  id: string; name: string; description: string; promptFile: string
-  cols: number; rows: number; needsRefImage: boolean
-  rowLabels?: string[]; excludeLastFrameRows?: number[]
-}
-
-export interface PipelineConfig {
-  id: string; name: string; description: string
-  presets: PipelinePreset[]; exportMode: 'whole' | 'by-row'; discardLastFrame: boolean
-}
-
 export interface OcConnection {
   id: string
   type: 'local' | 'remote'
   host?: string
   user?: string
-}
-
-export type CardStatus = 'idle' | 'generating' | 'processing' | 'ready' | 'error'
-
-export interface PipelineItem {
-  preset: PipelinePreset; status: CardStatus; error?: string
-  rawFrames: HTMLCanvasElement[]
-  keyedFrames: HTMLCanvasElement[]
-  rowGroups: HTMLCanvasElement[][]
-  rowLabels: string[]
-  globalOffset: Offset
-  rowOffsets: Offset[]
 }

@@ -21,7 +21,6 @@
     "show": "Mostrar",
     "hide": "Ocultar"
   },
-
   "mini": {
     "geminiDone": "Gemini ha terminado. Haz clic para ver.",
     "opencodeDone": "opencode ha terminado de trabajar. Haz clic para ver.",
@@ -60,11 +59,9 @@
     "remote": "Remoto",
     "custom": "Personalizado",
     "other": "Otro",
-    "createChar": "Crear personaje",
     "ipGenshin": "Genshin Impact",
     "ipUmaMusume": "Uma Musume"
   },
-
   "charNames": {
     "派蒙": "Paimon",
     "温迪": "Venti",
@@ -83,7 +80,6 @@
     "香企鹅": "Penguingum",
     "诗歌剧": "Shigeki"
   },
-
   "settings": {
     "ocConnections": "Conexiones OpenClaw",
     "noConnections": "Sin conexiones. Haz clic en \"Añadir\" para conectar una instancia de OpenClaw.",
@@ -103,7 +99,6 @@
     "step2": "2. Copia la clave pública al servidor remoto",
     "step3": "3. Verifica el inicio de sesión sin contraseña",
     "step4": "4. Ingresa el usuario y la dirección del servidor, luego haz clic en \"Probar\"",
-
     "claudeCode": "Claude Code",
     "enableClaudeCode": "Activar Claude Code",
     "enableClaudeCodeDesc": "Monitorear sesiones locales de Claude Code mediante Hooks",
@@ -113,7 +108,6 @@
     "enableClaudeDesktopDesc": "Monitorear sesiones locales de Claude Code Desktop mediante Hooks",
     "hookInstalled": "Hook instalado",
     "hookFailed": "Error de instalación:",
-
     "display": "Pantalla",
     "mascotPosition": "Posición de la mascota",
     "mascotPositionDesc": "En qué lado del notch se muestra la mascota",
@@ -131,7 +125,6 @@
     "largeMascotScaleDesc": "Multiplicador de escala de la mascota",
     "islandBg": "Fondo de isla",
     "islandBgDesc": "Selecciona o sube una imagen de fondo, arrastra para seleccionar el área de recorte",
-
     "sound": "Sonido",
     "petSfx": "Voz del personaje",
     "petSfxDesc": "Reproducir sonidos del personaje durante las interacciones",
@@ -172,12 +165,10 @@
     "autoCloseCompletionDesc": "Cerrar el popup de finalización automáticamente después de 5 segundos",
     "autoExpandOnTask": "Popup automático",
     "autoExpandOnTaskDesc": "Expandir el panel automáticamente cuando una tarea se completa o necesita entrada",
-
     "system": "Sistema",
     "autostart": "Iniciar al iniciar sesión",
     "autostartDesc": "Iniciar oc-claw automáticamente al iniciar sesión",
     "autostartFailed": "Error al actualizar el inicio automático:",
-
     "about": "Acerca de",
     "currentVersion": "Versión actual",
     "latest": "Última",
@@ -194,13 +185,11 @@
     "checking": "Verificando...",
     "checkUpdate": "Buscar actualizaciones",
     "exitApp": "Salir de la aplicación",
-
     "appMode": "Modo",
     "codingMode": "Modo Código",
     "codingModeDesc": "Monitoreo multi-agente, estadísticas de tokens y alertas",
     "petMode": "Modo Mascota",
     "petModeDesc": "Animaciones, sistema de crianza y juego interactivo",
-
     "language": "Idioma",
     "languageDesc": "Seleccionar el idioma de la interfaz",
     "langZh": "中文",
@@ -210,14 +199,12 @@
     "langEs": "Español",
     "langFr": "Français"
   },
-
   "onboarding": {
     "chooseModeTitle": "Elige tu modo",
     "chooseModeSubtitle": "Puedes cambiar de modo en cualquier momento desde Ajustes.",
     "codingModeLongDesc": "Supervisa tus agentes de IA. Pasa el cursor por la mascota para ver estado, sesiones y actividad.",
     "petModeLongDesc": "Cría tu mascota de escritorio. Dale comida, juega y sube afinidad con animaciones ricas."
   },
-
   "pet": {
     "dailyGift": "Regalo diario",
     "claimed": "Reclamado",
@@ -237,7 +224,6 @@
     "min": "min",
     "go": "IR"
   },
-
   "petPicker": {
     "mascots": "Mascotas",
     "selectedMascot": "{{name}} seleccionada",
@@ -255,86 +241,6 @@
     "demoModePickHint": "Haz clic en una mascota para colocar otra en la pantalla",
     "addMascot": "Añadir mascota"
   },
-
-  "character": {
-    "trackAgent": "Seguir agente",
-    "trackAgentDesc": "El estado y chat de la mascota se vincularán a este agente",
-    "currentPetChar": "Personaje actual",
-    "uploadPetGif": "Subir animación de mascota",
-    "charName": "Nombre del personaje",
-    "charNamePlaceholder": "ej. hutao",
-    "workGif": "Animación de trabajo",
-    "restGif": "Animación de descanso",
-    "uploadFiles": "Subir archivos",
-    "inUse": "En uso",
-    "editImages": "Editar imágenes",
-    "deleteChar": "Eliminar personaje",
-    "noImages": "Sin imágenes",
-    "noCharacters": "No hay personajes. Por favor sube uno.",
-    "miniModeChar": "Personaje modo Mini",
-    "miniModeCharDesc": "Selecciona el personaje a mostrar en el widget Mini en la parte superior de la pantalla",
-    "characters": "Personajes",
-    "editChar": "Editar personajes",
-    "uploadMiniGif": "Subir animación Mini",
-    "actionType": "Tipo de acción",
-    "actionTypePlaceholder": "ej. keli",
-    "selectGifFile": "Seleccionar archivo de animación",
-    "clickOrDrag": "Haz clic o arrastra archivos aquí",
-    "gifFormat": "Formato GIF compatible, máx. 5MB",
-    "autoSelect": "Selección automática",
-    "charNameExists": "El nombre del personaje ya existe. La animación se añadirá al personaje.",
-    "saveFailed": "Error al guardar:"
-  },
-
-  "createChar": {
-    "title": "Crear nuevo personaje",
-    "step1Title": "Ve a Gemini para generar el sprite del personaje",
-    "step1Desc": "Usa Google Gemini para generar hojas de sprites de personajes.",
-    "openGemini": "Abrir Gemini",
-    "step2Title": "Sube la imagen para corte automático",
-    "dropToUpload": "Suelta para subir la imagen",
-    "clickOrDragUpload": "Haz clic o arrastra para subir imagen",
-    "supportFormats": "Compatible con PNG, JPG, WEBP",
-    "processing": "Procesando imagen...",
-    "processingDesc": "Identificando frames de acción y generando animaciones",
-    "charName": "Nombre del personaje",
-    "charNamePlaceholder": "Ingresa nombre del personaje...",
-    "tunFrames": "Ajustar frames de acción",
-    "tuneDesc": "Si el corte automático tiene un desfase, ajusta las coordenadas X/Y",
-    "reUpload": "Volver a subir",
-    "saveChar": "Guardar personaje",
-    "nameExists": "El nombre del personaje ya existe. Elige otro nombre.",
-    "cantReadFile": "No se puede leer el archivo soltado"
-  },
-
-  "gifMaker": {
-    "geminiApiKey": "Gemini API Key",
-    "baseUrl": "Base URL",
-    "optional": "(opcional)",
-    "defaultGoogle": "Predeterminado (Google oficial)",
-    "charName": "Nombre del personaje",
-    "charNamePlaceholder": "ej. hutao",
-    "referenceImage": "Imagen de referencia",
-    "reselect": "Volver a seleccionar",
-    "selectFile": "Seleccionar archivo",
-    "aiGenerating": "IA generando...",
-    "aiGenerate": "Generar con IA",
-    "uploadImage": "Subir imagen",
-    "prompt": "Prompt",
-    "idleHint": "Haz clic en \"Prompt\" para ver los requisitos, copia a ChatGPT / Gemini / Midjourney para generar la imagen, luego súbela",
-    "uploadHint": "Copia el prompt a ChatGPT/Gemini para generar una imagen, luego súbela aquí",
-    "globalOffset": "Desplazamiento global",
-    "saveAs": "Guardar como {{label}}",
-    "enterCharName": "Ingresa un nombre de personaje",
-    "fillApiKey": "Ingresa tu Gemini API Key",
-    "processingFrames": "Procesando frames...",
-    "statusWaiting": "Esperando",
-    "statusGenerating": "IA generando...",
-    "statusProcessing": "Procesando...",
-    "statusReady": "Listo",
-    "statusError": "Error"
-  },
-
   "agentDetail": {
     "working": "Trabajando",
     "idleStatus": "Inactivo",
@@ -361,7 +267,6 @@
     "times": "",
     "callsUnit": "Cantidad"
   },
-
   "claudeStats": {
     "title": "Estadísticas de Claude Code",
     "titleCodex": "Estadísticas de Codex",
